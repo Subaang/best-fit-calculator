@@ -2,6 +2,7 @@
 
 const go = document.querySelector("#go");
 const table = document.querySelector("#table");
+const results = document.querySelector('#results');
 
 
 
@@ -56,7 +57,6 @@ go.addEventListener('click',(event) => {
 
     
     calc.addEventListener('click', () => {
-        for(let i = 0; i < n; i++){
             let x_bar = 0, y_bar = 0;
             // finding x_bar and y_bar
             for(let i = 0; i < n; i++){
@@ -72,14 +72,33 @@ go.addEventListener('click',(event) => {
             for(let i = 0; i < n; i++){
                 x_i = parseFloat(document.querySelector('.x_i_'+i).value);
                 y_i = parseFloat(document.querySelector('.y_i_'+i).value);
-
-                console.log(x_i);
                 
                 document.querySelector('.x_i-mean_'+i).value = x_i - x_bar;
                 document.querySelector('.numerator_'+i).value = (x_i - x_bar)*y_i;
 
             }
-        }
+
+            let sigma_third_square = 0, sigma_numerator = 0;
+
+            for(let i = 0; i < n; i++){
+                sigma_third_square += parseFloat(document.querySelector('.x_i-mean_'+i).value)**2;
+                sigma_numerator += parseFloat(document.querySelector('.numerator_'+i).value);
+            }
+
+      
+            let m = document.createElement("p");
+            m.textContent = sigma_numerator/sigma_third_square;
+            results.appendChild(m);
+            
+
+
+
+
+
+            
+
+
+        
         
     })
 
